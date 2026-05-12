@@ -18,6 +18,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// Added Razor Core Service 
+builder.Services.AddRazorPages();
+
 // ── Database ───────────────────────────────────────────────────────
 // Uses SQLite. The database file is created automatically in the project folder.
 builder.Services.AddDbContext<HRContext>(options =>
@@ -37,12 +40,18 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Added use static files
+app.UseStaticFiles(); 
+
 // ── Middleware Pipeline ────────────────────────────────────────────
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCors("AllowQuotationSystem");
 app.MapControllers();
+
+// Razor page mapping
+app.MapRazorPages();
 
 // ── Ensure DB is created and seeded on startup ─────────────────────
 using (var scope = app.Services.CreateScope())

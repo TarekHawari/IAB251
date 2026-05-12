@@ -385,3 +385,8 @@ C:/IAB251/2026/Assignment 2/API System/HRSystem/HRSystem/obj/Debug/net8.0/ref/HR
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.HRSystem.props
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.HRSystem.props
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/staticwebassets.pack.json
+/home/tarek/Desktop/251-a2/HRSystem/bin/Debug/net8.0/HRSystem.staticwebassets.runtime.json
+/home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/HRSystem.RazorAssemblyInfo.cache
+/home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/HRSystem.RazorAssemblyInfo.cs
+/home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
+/home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/scopedcss/projectbundle/HRSystem.bundle.scp.css
