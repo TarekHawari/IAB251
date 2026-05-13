@@ -1,0 +1,41 @@
+﻿@page
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.IndexModel
+@{
+    ViewData["Title"] = "Quotes";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h2 class="card-title">Quotation Requests</h2>
+
+                <p class="text-muted">
+                    Customers can submit freight quotation requests after logging into their InterportCargo account.
+                </p>
+
+                <p>
+                    To request a quotation, please log in as an existing customer or register as a new customer.
+                </p>
+
+                <div class="d-flex gap-2 mt-3">
+                    <a asp-page="/Account/Login" class="btn btn-primary">
+                        Login
+                    </a>
+
+                    <a asp-page="/Account/Register" class="btn btn-outline-dark">
+                        Register
+                    </a>
+
+                    <a asp-page="/Index" class="btn btn-secondary">
+                        Back to Home
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

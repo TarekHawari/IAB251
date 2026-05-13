@@ -50,8 +50,16 @@ app.UseSwaggerUI();
 app.UseCors("AllowQuotationSystem");
 app.MapControllers();
 
+
+app.UseAuthorization(); // x
+
+app.UseRouting(); // x
+
+
 // Razor page mapping
-app.MapRazorPages();
+app.MapStaticAssets();
+app.MapRazorPages()
+    .WithStaticAssets();
 
 // ── Ensure DB is created and seeded on startup ─────────────────────
 using (var scope = app.Services.CreateScope())

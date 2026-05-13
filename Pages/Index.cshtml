@@ -1,10 +1,49 @@
 ﻿@page
 @model IndexModel
+
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="py-5">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="display-5 fw-bold">InterportCargo Enterprise System</h1>
+
+            <p class="lead mt-3">
+                A prototype portal for managing customer registrations, quotation requests,
+                bookings, outturn processing, and employee quotation functions.
+            </p>
+
+            <div class="mt-4 d-flex gap-2">
+                <a asp-page="/Account/Register" class="btn btn-primary btn-lg">
+                    Register as Customer
+                </a>
+
+                <a asp-page="/Account/Login" class="btn btn-outline-dark btn-lg">
+                    Login
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">System Access</h5>
+
+                    <p class="card-text">
+                        New customers can register to submit quotation requests.
+                        Existing customers and employees can log in to access their dashboard.
+                    </p>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>✓ Customer registration</li>
+                        <li>✓ Customer quotation requests</li>
+                        <li>✓ Employee quotation management</li>
+                        <li>✓ Booking and outturn navigation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

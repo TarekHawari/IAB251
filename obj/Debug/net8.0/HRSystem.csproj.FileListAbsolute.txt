@@ -390,3 +390,4 @@ C:/IAB251/2026/Assignment 2/API System/HRSystem/HRSystem/obj/Debug/net8.0/ref/HR
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/HRSystem.RazorAssemblyInfo.cs
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/scopedcss/Pages/Shared/_Layout.cshtml.rz.scp.css
 /home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/scopedcss/projectbundle/HRSystem.bundle.scp.css
+/home/tarek/Desktop/251-a2/HRSystem/obj/Debug/net8.0/rpswa.dswa.cache.json
