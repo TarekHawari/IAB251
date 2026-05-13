@@ -1,0 +1,63 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <h2 class="mb-3">Login to InterportCargo</h2>
+
+        <p class="text-muted">
+            Select the correct portal based on whether you are a customer or employee.
+        </p>
+
+        <div class="row mt-4">
+
+            <!-- Customer Login Option -->
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h4>Customer Portal</h4>
+
+                        <p>
+                            Existing customers can log in to submit and manage quotation requests.
+                        </p>
+
+                        <a href="#" class="btn btn-primary">
+                            Customer Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Login Option -->
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h4>Employee Portal</h4>
+
+                        <p>
+                            Quotation officers can log in to access quotation management functions.
+                        </p>
+
+                        <a href="#" class="btn btn-dark">
+                            Employee Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a asp-page="/Index" class="btn btn-secondary mt-3">
+            Back to Home
+        </a>
+
+    </div>
+</div>
+
+
+
