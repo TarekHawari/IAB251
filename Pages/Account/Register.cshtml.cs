@@ -5,8 +5,13 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        public RegisterModel() {
+
+        }
+
         public void OnGet()
         {
+
         }
     }
 }
