@@ -25,9 +25,8 @@ namespace IAB251InterportCargoAssignment2Grp21.Models
         // [] 
         public string Phone { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Company name is required.")]
         [StringLength(150, ErrorMessage = "Cannot exceed 150 characters.")] 
-        public string CompanyName { get; set; } = string.Empty;
+        public string? CompanyName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Address is required.")]
         [StringLength(250, ErrorMessage = "Cannot exceed 250 characters.")] 
