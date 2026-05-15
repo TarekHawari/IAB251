@@ -1,3 +1,7 @@
 <Solution>
+  <Folder Name="/ExternalSystems/" />
+  <Folder Name="/ExternalSystems/HRSystem/">
+    <Project Path="ExternalSystems/HRSystem/HRSystem/HRSystem.csproj" />
+  </Folder>
   <Project Path="IAB251InterportCargoAssignment2Grp21/IAB251InterportCargoAssignment2Grp21.csproj" />
 </Solution>
