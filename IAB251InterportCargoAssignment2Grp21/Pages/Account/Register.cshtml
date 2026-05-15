@@ -16,44 +16,46 @@
                     New customers can register their details to access quotation request services.
                 </p>
 
+                @* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx charavter limit *@
                 <form method="post">
 
                     <div class="mb-3">
                         <label class="form-label">First Name</label>
-                        <input class="form-control" type="text" placeholder="Enter first name" />
+                        <input class="form-control" name="FirstName" nametype="text" placeholder="Enter first name" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Family Name</label>
-                        <input class="form-control" type="text" placeholder="Enter family name" />
+                        <input class="form-control" name="FamilyName" type="text" placeholder="Enter family name" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input class="form-control" type="email" placeholder="Enter email address" />
+                        <input class="form-control" asp-for="customer.Email" placeholder="Enter email address" />
+                        <span class="text-danger" asp-validation-for="customer.Email">  </span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
-                        <input class="form-control" type="tel" placeholder="Enter phone number" />
+                        <input class="form-control" name="Phone" type="tel" placeholder="Enter phone number" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Company Name</label>
-                        <input class="form-control" type="text" placeholder="Enter company name if applicable" />
+                        <input class="form-control" name="CompanyName" type="text" placeholder="Enter company name if applicable" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Address</label>
-                        <input class="form-control" type="text" placeholder="Enter address" />
+                        <input class="form-control" name="Address" type="text" placeholder="Enter address" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input class="form-control" type="password" placeholder="Enter password" />
+                        <input class="form-control" name="Password" type="password" placeholder="Enter password" />
                     </div>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" asp-page-handler="CustomerRegister">
                         Register
                     </button>
 

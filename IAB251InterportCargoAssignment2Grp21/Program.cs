@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using IAB251InterportCargoAssignment2Grp21.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<InterportCargoContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("InterportCargoDatabase")));
 
 var app = builder.Build();
 
