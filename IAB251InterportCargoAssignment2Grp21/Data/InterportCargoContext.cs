@@ -11,8 +11,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Data
         {
         }
 
-        public DbSet<Customer> Customer { get; set; }
-        // public DbSet<Employee> Employee { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         // protected override void OnModelCreating(ModelBuilder modelBuilder)
         // {

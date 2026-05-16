@@ -22,7 +22,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Models
 
         [Required(ErrorMessage = "Phone number is required.")]
         [StringLength(20, ErrorMessage = "Cannot exceed 20 characters.")] 
-        // [] 
         public string Phone { get; set; } = string.Empty;
 
         [StringLength(150, ErrorMessage = "Cannot exceed 150 characters.")] 

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "52T04Yzez34=",
+  "dgSpecHash": "qWysq7gV9m4=",
   "success": true,
   "projectFilePath": "/home/tarek/Desktop/251-a2/IAB251InterportCargoAssignment2Grp21/IAB251InterportCargoAssignment2Grp21.csproj",
   "expectedPackageFiles": [
+    "/home/tarek/.nuget/packages/bcrypt.net-next/4.2.0/bcrypt.net-next.4.2.0.nupkg.sha512",
     "/home/tarek/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/tarek/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/tarek/.nuget/packages/microsoft.build.framework/17.8.43/microsoft.build.framework.17.8.43.nupkg.sha512",
