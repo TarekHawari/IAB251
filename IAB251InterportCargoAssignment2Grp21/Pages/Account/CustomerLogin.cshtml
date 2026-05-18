@@ -16,12 +16,14 @@
                 <form method="post">
                     <div class="mb-3">
                         <label class="form-label">Email:</label>
-                        <input class="form-control" name="email" type="email" placeholder="Enter Email" />
+                        <input class="form-control" asp-for="customer.Email" placeholder="Enter email address" />
+                        <span class="text-danger" asp-validation-for="customer.Email"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password:</label>
-                        <input class="form-control" name="password" type="password" placeholder="Enter Password" />
+                        <input class="form-control" asp-for="customer.Password" type="password" placeholder="Enter password" />
+                        <span class="text-danger" asp-validation-for="customer.Password"></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary" asp-page-handler="CustomerLogin">

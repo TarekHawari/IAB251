@@ -9,6 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<InterportCargoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("InterportCargoDatabase")));
 
+builder.Services.AddAuthentication("Cookies").AddCookie();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,6 +24,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
