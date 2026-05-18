@@ -3,6 +3,9 @@
 
 @{
     ViewData["Title"] = "Outturn";
+
+    var employeeName = HttpContext.Session.GetString("EmployeeName");
+    var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
 }
 
 <div class="row justify-content-center">
@@ -13,28 +16,47 @@
 
                 <h2 class="card-title">Outturn Processing</h2>
 
-                <p class="text-muted">
-                    Outturn processing functions are available to authorised users of the InterportCargo system.
-                </p>
+                @if (isLoggedIn)
+                {
 
-                <p>
-                    Please log in to access outturn-related system functions.
-                </p>
+                    <p class="text-muted">
+                        Welcome, @employeeName. Outturn functions are recognised as part of the wider InterportCargo enterprise system.
+                    </p>
 
-                <div class="d-flex gap-2 mt-3">
-                    <a asp-page="/Account/Login" class="btn btn-primary">
-                        Login
+                    <p>
+                        Outturn functionality is outside the current Sprint 1 quotation prototype scope and will be implemented in a later iteration.
+                    </p>
+
+                    <a asp-page="/Quotes/OfficerDashboard" class="btn btn-primary">
+                        Return to Quotation Dashboard
                     </a>
+                }
+                else
+                {
 
-                    <a asp-page="/Account/Register" class="btn btn-outline-dark">
-                        Register
-                    </a>
+                    <p class="text-muted">
+                        Outturn processing functions are available to authorised users of the InterportCargo system.
+                    </p>
 
-                    <a asp-page="/Index" class="btn btn-secondary">
-                        Back to Home
-                    </a>
-                </div>
+                    <p>
+                        Please log in to access outturn-related system functions.
+                    </p>
 
+                    <div class="d-flex gap-2 mt-3">
+                        <a asp-page="/Account/Login" class="btn btn-primary">
+                            Login
+                        </a>
+
+                        <a asp-page="/Account/Register" class="btn btn-outline-dark">
+                            Register
+                        </a>
+
+                        <a asp-page="/Index" class="btn btn-secondary">
+                            Back to Home
+                        </a>
+
+                    </div>
+                }
             </div>
         </div>
 

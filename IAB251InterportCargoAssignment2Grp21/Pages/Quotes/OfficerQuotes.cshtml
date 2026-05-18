@@ -1,0 +1,50 @@
+﻿@page
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.OfficerQuotesModel
+@{
+    ViewData["Title"] = "Officer Quotes";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2>Quotation Management</h2>
+
+        <p class="text-muted">
+            This page represents the quotation-related functions available to authorised quotation officers.
+        </p>
+
+        <table class="table table-bordered mt-4">
+            <thead class="table-light">
+                <tr>
+                    <th>Quotation Number</th>
+                    <th>Client Name</th>
+                    <th>Date Issued</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Q-1001</td>
+                    <td>Example Imports Pty Ltd</td>
+                    <td>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>Q-1002</td>
+                    <td>Coastal Freight Services</td>
+                    <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy")</td>
+                    <td>Accepted</td>
+                </tr>
+                <tr>
+                    <td>Q-1003</td>
+                    <td>Metro Logistics Group</td>
+                    <td>@DateTime.Now.AddDays(-5).ToString("dd/MM/yyyy")</td>
+                    <td>Rejected</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="small text-muted">
+            Prototype data shown for Sprint 1 demonstration purposes.
+        </p>
+    </div>
+</div>

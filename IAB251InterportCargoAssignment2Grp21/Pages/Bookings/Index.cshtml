@@ -3,6 +3,9 @@
 
 @{
     ViewData["Title"] = "Booking";
+
+    var employeeName = HttpContext.Session.GetString("EmployeeName");
+    var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
 }
 
 <div class="row justify-content-center">
@@ -13,27 +16,44 @@
 
                 <h2 class="card-title">Booking Management</h2>
 
-                <p class="text-muted">
-                    Booking functions are available to registered InterportCargo customers and authorised employees.
-                </p>
+                @if (isLoggedIn)
+                {
+                    <p class="text-muted">
+                        Welcome, @employeeName. Booking functions are recognised as part of the wider InterportCargo enterprise system.
+                    </p>
 
-                <p>
-                    Please log in to access booking-related system functions.
-                </p>
+                    <p>
+                        Booking functionality is outside the current Sprint 1 quotation prototype scope and will be implemented in a later iteration.
+                    </p>
 
-                <div class="d-flex gap-2 mt-3">
-                    <a asp-page="/Account/Login" class="btn btn-primary">
-                        Login
+                    <a asp-page="/Quotes/OfficerDashboard" class="btn btn-primary">
+                        Return to Quotation Dashboard
                     </a>
+                }
+                else
+                {
+                    <p class="text-muted">
+                        Booking functions are available to registered InterportCargo customers and authorised employees.
+                    </p>
 
-                    <a asp-page="/Account/Register" class="btn btn-outline-dark">
-                        Register
-                    </a>
+                    <p>
+                        Please log in to access booking-related system functions.
+                    </p>
 
-                    <a asp-page="/Index" class="btn btn-secondary">
-                        Back to Home
-                    </a>
-                </div>
+                    <div class="d-flex gap-2 mt-3">
+                        <a asp-page="/Account/Login" class="btn btn-primary">
+                            Login
+                        </a>
+
+                        <a asp-page="/Account/Register" class="btn btn-outline-dark">
+                            Register
+                        </a>
+
+                        <a asp-page="/Index" class="btn btn-secondary">
+                            Back to Home
+                        </a>
+                    </div>
+                }
 
             </div>
         </div>

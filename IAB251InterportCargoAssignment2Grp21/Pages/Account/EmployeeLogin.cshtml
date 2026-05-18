@@ -1,0 +1,56 @@
+﻿@page
+@model IAB251InterportCargoAssignment2Grp21.Pages.Account.EmployeeLoginModel
+@{
+    ViewData["Title"] = "Employee Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h2 class="card-title mb-3">Employee Login</h2>
+
+                <p class="text-muted">
+                    Quotation officers can log in using their work email and employee key.
+                </p>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @Model.ErrorMessage
+                    </div>
+                }
+
+                <form method="post">
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="EmployeeKey" class="form-label"></label>
+                        <input asp-for="EmployeeKey" class="form-control" type="password" />
+                        <span asp-validation-for="EmployeeKey" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Login
+                    </button>
+
+                    <a asp-page="/Account/Login" class="btn btn-secondary ms-2">
+                        Back
+                    </a>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
