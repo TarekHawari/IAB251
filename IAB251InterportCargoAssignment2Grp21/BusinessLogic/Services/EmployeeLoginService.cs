@@ -18,6 +18,7 @@ namespace IAB251InterportCargoAssignment2Grp21.BusinessLogic.Services
             _hrApiClient = hrApiClient;
         }
 
+
         public async Task<EmployeeLoginResult> LoginAsync(string email, string employeeKey)
         {
             var localCredential = _credentialRepository.GetByEmail(email);

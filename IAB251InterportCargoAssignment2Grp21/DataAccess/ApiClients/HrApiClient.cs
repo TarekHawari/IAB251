@@ -15,7 +15,6 @@ namespace IAB251InterportCargoAssignment2Grp21.DataAccess.ApiClients
             _httpClient = httpClientFactory.CreateClient();
 
             var baseUrl = configuration["HrApi:BaseUrl"];
-            Console.WriteLine($"HR API BaseUrl: {baseUrl}");
 
             if (string.IsNullOrWhiteSpace(baseUrl))
             {
