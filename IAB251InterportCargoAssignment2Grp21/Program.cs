@@ -5,8 +5,8 @@ using IAB251InterportCargoAssignment2Grp21.BusinessLogic.Services;
 using IAB251InterportCargoAssignment2Grp21.DataAccess.ApiClients;
 using IAB251InterportCargoAssignment2Grp21.DataAccess.Interfaces;
 using IAB251InterportCargoAssignment2Grp21.DataAccess.Repositories;
-
-
+using Microsoft.EntityFrameworkCore;
+using IAB251InterportCargoAssignment2Grp21.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +35,10 @@ builder.Services.AddScoped<IEmployeeLoginService, EmployeeLoginService>();
 builder.Services.AddSingleton<ILocalEmployeeCredentialRepository, InMemoryEmployeeCredentialRepository>();
 
 
+builder.Services.AddDbContext<InterportCargoContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("InterportCargoDatabase")));
 
+builder.Services.AddAuthentication("Cookies").AddCookie();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -52,6 +55,7 @@ app.UseRouting();
 
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
