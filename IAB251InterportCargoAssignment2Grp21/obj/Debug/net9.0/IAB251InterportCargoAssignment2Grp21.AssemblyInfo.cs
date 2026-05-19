@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IAB251InterportCargoAssignment2Grp21")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fed711a7cdee22fa83311641d449d5569e391cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97dd9b111c4a6b27edfd2e173480708cf185395d")]
 [assembly: System.Reflection.AssemblyProductAttribute("IAB251InterportCargoAssignment2Grp21")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IAB251InterportCargoAssignment2Grp21")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
