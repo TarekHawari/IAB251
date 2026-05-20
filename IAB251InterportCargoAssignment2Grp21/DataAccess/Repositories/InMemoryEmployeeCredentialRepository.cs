@@ -1,6 +1,5 @@
-﻿
-using IAB251InterportCargoAssignment2Grp21.BusinessLogic.Entities;
-using IAB251InterportCargoAssignment2Grp21.DataAccess.Interfaces;
+﻿using IAB251InterportCargoAssignment2Grp21.DataAccess.Interfaces;
+using IAB251InterportCargoAssignment2Grp21.Models;
 
 namespace IAB251InterportCargoAssignment2Grp21.DataAccess.Repositories
 {
