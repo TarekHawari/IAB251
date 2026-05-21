@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     var employeeName = Context.Session.GetString("EmployeeName");
     var employeeRole = Context.Session.GetString("EmployeeRole");
     var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
@@ -6,7 +6,7 @@
         && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
 
     var currentPath = Context.Request.Path.ToString().ToLowerInvariant();
-
+    
     var customerName = Context.Session.GetString("CustomerName");
     var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName);
 }
@@ -92,6 +92,7 @@
                                 Quotes
                             </a>
                         </li>
+                    }
 
                     <li class="nav-item">
                         <a class="nav-link @(currentPath.StartsWith("/bookings") ? "active text-white fw-semibold" : "")"
@@ -132,7 +133,7 @@
                             Logout
                         </a>
                     }
-
+                    
                     else
                     {
                         <a class="btn btn-outline-light" asp-page="/Account/Register">
