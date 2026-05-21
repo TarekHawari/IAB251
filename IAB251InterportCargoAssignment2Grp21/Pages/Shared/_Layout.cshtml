@@ -4,6 +4,9 @@
     var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
     var isQuotationOfficer = !string.IsNullOrWhiteSpace(employeeRole)
         && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
+
+    var customerName = Context.Session.GetString("CustomerName");
+    var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName);
 }
 
 <!DOCTYPE html>
@@ -65,6 +68,15 @@
                         </li>
                     }
 
+                    else if (isCustomerLoggedIn) 
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Quotes/CustomerDashboard">
+                                Quote Dashboard
+                            </a>
+                        </li>
+                    }
+
                     else 
                     {
                         <li class="nav-item">
@@ -72,19 +84,20 @@
                                 Quotes
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Bookings/Index">
+                                Booking
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Outturn/Index">
+                                Outturn
+                            </a>
+                        </li>
                     }
-
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Bookings/Index">
-                            Booking
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Outturn/Index">
-                            Outturn
-                        </a>
-                    </li>
+                    
 
                 </ul>
 
@@ -100,6 +113,18 @@
                             Logout
                         </a>
                     }
+
+                    else if (isCustomerLoggedIn)
+                    {
+                        <span class="navbar-text text-light me-2">
+                            @customerName
+                        </span>
+
+                        <a class="btn btn-outline-light" asp-page="/Account/Logout">
+                            Logout
+                        </a>
+                    }
+
                     else
                     {
                         <a class="btn btn-outline-light" asp-page="/Account/Register">

@@ -10,7 +10,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
     public class CustomerRegisterModel : PageModel
     {
         [BindProperty]
-        public Customer customer { get; set; }
+        public Customer customer { get; set; } = default!;
 
         private InterportCargoContext dbContext;
 
@@ -25,10 +25,13 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
 
         public IActionResult OnPostCustomerRegister()   
         {
+            if (!ModelState.IsValid)
+                return Page();
+
             if (!validateForm())
                 return Page();
 
-            customer.Password = handlePassword(customer!.Password);
+            customer.Password = handlePassword(customer.Password);
             dbContext.Customers.Add(customer);
             dbContext.SaveChanges();
 
@@ -41,28 +44,10 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
                 ModelState.AddModelError("customer.Email", "Email already exists");
                 return false;
             }
-
-            // each input field is put into an array then handeled to check for nulls and empty
-            PropertyInfo[] inputs = customer.GetType().GetProperties();
-            foreach (PropertyInfo input in inputs) {
-                if (string.IsNullOrEmpty(input.GetValue(customer)?.ToString()))
-                    return false;
-            }
             return true;
         }
 
-        private bool validateEmail(string? email) {
-            try {
-                // if invalid type, then it will be caught
-                MailAddress validity = new MailAddress(email);
-            
-                // validates if the user put correct email
-                if (validity.Address != email)
-                    return false;
-            }
-            catch {
-                return false;
-            }
+        private bool validateEmail(string email) {
             return dbContext.Customers.Any(user => user.Email == email); 
         }
 
