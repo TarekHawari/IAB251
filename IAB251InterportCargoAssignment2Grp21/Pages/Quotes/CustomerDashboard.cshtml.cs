@@ -5,13 +5,13 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
 {
     public class CustomerDashboardModel : PageModel
     {
-        // public string CName { get; set; } = string.Empty;
+        public string CustomerFullName { get; set; } = string.Empty;
 
         public IActionResult OnGet()
         {
-            var CustomerName = HttpContext.Session.GetString("CustomerName");
+            var CustomerFullName = HttpContext.Session.GetString("CustomerName");
 
-            if (string.IsNullOrWhiteSpace(CustomerName))
+            if (string.IsNullOrWhiteSpace(CustomerFullName))
             {
                 return RedirectToPage("/Account/CustomerLogin");
             }
