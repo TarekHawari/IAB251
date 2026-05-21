@@ -1,0 +1,38 @@
+﻿@page
+@model IAB251InterportCargoAssignment2Grp21.Pages.Account.ConfirmLogoutModel
+
+@{
+    ViewData["Title"] = "Confirm Logout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <h2 class="card-title mb-3">Sign out?</h2>
+
+                <p class="text-muted">
+                    You are currently signed in as @Model.EmployeeName.
+                </p>
+
+                <p>
+                    Returning to the public home page will sign you out of the quotation officer portal.
+                </p>
+
+                <form method="post" class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-danger">
+                        Sign out and return home
+                    </button>
+
+                    <a asp-page="/Quotes/OfficerDashboard" class="btn btn-secondary">
+                        Stay signed in
+                    </a>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -32,8 +32,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IHrApiClient, HrApiClient>();
 builder.Services.AddScoped<IEmployeeLoginAppService, EmployeeLoginAppService>();
 builder.Services.AddScoped<IEmployeeLoginService, EmployeeLoginService>();
-builder.Services.AddSingleton<ILocalEmployeeCredentialRepository, InMemoryEmployeeCredentialRepository>();
-
+builder.Services.AddScoped<ILocalEmployeeCredentialRepository, EFEmployeeCredentialRepository>();
 
 builder.Services.AddDbContext<InterportCargoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("InterportCargoDatabase")));
