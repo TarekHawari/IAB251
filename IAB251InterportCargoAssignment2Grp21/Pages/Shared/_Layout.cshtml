@@ -5,6 +5,8 @@
     var isQuotationOfficer = !string.IsNullOrWhiteSpace(employeeRole)
         && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
 
+    var currentPath = Context.Request.Path.ToString().ToLowerInvariant();
+
     var customerName = Context.Session.GetString("CustomerName");
     var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName);
 }
@@ -25,9 +27,18 @@
         <div class="container">
 
             <!-- Brand / Home Link -->
-            <a class="navbar-brand fw-bold" asp-page="/Index">
-                InterportCargo
-            </a>
+            @if (isLoggedIn) 
+            {
+                <a class="navbar-brand text-light opacity-75 fw-bold" asp-page="/Account/ConfirmLogout">
+                    InterportCargo
+                </a>
+            }
+            else 
+            {
+                <a class="navbar-brand text-light opacity-75 fw-bold" asp-page="/Index">
+                    InterportCargo
+                </a>
+            }
 
             <!-- Mobile Navbar Toggle -->
             <button class="navbar-toggler"
@@ -46,23 +57,19 @@
                 <!-- Left-side Navigation -->
                 <ul class="navbar-nav me-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Index">
-                            Home
-                        </a>
-                    </li>
-
 
                     @if (isQuotationOfficer)
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Quotes/OfficerDashboard">
+                            <a class="nav-link @(currentPath.Contains("/quotes/officerdashboard") ? "active text-white fw-semibold" : "")"
+                               asp-page="/Quotes/OfficerDashboard">
                                 Quotation Dashboard
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Quotes/OfficerQuotes">
+                            <a class="nav-link @(currentPath.Contains("/quotes/officerquotes") ? "active text-white fw-semibold" : "")"
+                               asp-page="/Quotes/OfficerQuotes">
                                 View Quotes
                             </a>
                         </li>
@@ -80,24 +87,25 @@
                     else 
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Quotes/Index">
+                            <a class="nav-link @(currentPath.StartsWith("/quotes") ? "active text-white fw-semibold" : "")"
+                               asp-page="/Quotes/Index">
                                 Quotes
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-page="/Bookings/Index">
-                                Booking
-                            </a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPath.StartsWith("/bookings") ? "active text-white fw-semibold" : "")"
+                           asp-page="/Bookings/Index">
+                            Booking
+                        </a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" asp-page="/Outturn/Index">
-                                Outturn
-                            </a>
-                        </li>
-                    }
-                    
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPath.StartsWith("/outturn") ? "active text-white fw-semibold" : "")"
+                           asp-page="/Outturn/Index">
+                            Outturn
+                        </a>
+                    </li>
 
                 </ul>
 
