@@ -4,19 +4,12 @@ using IAB251InterportCargoAssignment2Grp21.Models;
 using System.Net.Mail;
 using IAB251InterportCargoAssignment2Grp21.Data;
 using System.Reflection;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 
 namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
 {
     public class CustomerLoginModel : PageModel
     {
-        // [BindProperty]
-        // public string? email { get; set; }
-        
-        // [BindProperty]
-        // public string? password { get; set; }
-
         [BindProperty]
         public Customer customer { get; set; } = default!;
 
@@ -25,7 +18,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
         public CustomerLoginModel(InterportCargoContext _dbContext) {
             dbContext = _dbContext;
         }
-
 
         public void OnGet()
         {
@@ -37,7 +29,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
             if (!validateForm())
                 return Page();
 
-            return RedirectToPage("/index");
+            return RedirectToPage("/Quotes/CustomerDashboard");
         }
 
 
@@ -71,7 +63,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
             return true;
         }
 
-        private bool validateEmail(string? email) {
+        private bool validateEmail(string email) {
             try {
                 // if invalid type, then it will be caught
                 MailAddress validity = new MailAddress(email);
@@ -88,7 +80,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
         }
 
         private bool verifyPassword() {
-            Customer user = dbContext.Customers.FirstOrDefault(user => user.Email == customer.Email);
+            Customer? user = dbContext.Customers.FirstOrDefault(user => user.Email == customer.Email);
             
             if (user == null) {
                 ModelState.AddModelError("customer.Email", "Cannot login, try again later");
@@ -100,14 +92,17 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
                 return false;
             }
 
-            createSession();
+            createSession(user);
             return true;
         }
 
-        private void createSession() {
-            List<Claim> claims = new List<Claim> {new Claim(ClaimTypes.Name, customer.Email)};
-            ClaimsIdentity identity = new ClaimsIdentity(claims, "Cookies");
-            HttpContext.SignInAsync("Cookies", new ClaimsPrincipal(identity)).Wait();
+        private void createSession(Customer user) {
+            string fullname = $"{user.FirstName} {user.FamilyName}";
+            HttpContext.Session.SetString("CustomerEmail", user.Email);
+            HttpContext.Session.SetString("CustomerName", fullname);
+
+
+            
         }
         
     }

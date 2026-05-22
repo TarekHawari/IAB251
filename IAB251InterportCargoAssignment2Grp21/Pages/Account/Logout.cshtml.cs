@@ -8,6 +8,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
         public IActionResult OnGet()
         {
             HttpContext.Session.Clear();
+            Response.Cookies.Delete(".AspNetCore.Session");
 
             return RedirectToPage("/Index");
         }

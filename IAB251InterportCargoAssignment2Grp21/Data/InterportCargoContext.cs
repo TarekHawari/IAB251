@@ -16,7 +16,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Data
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
-            modelBuilder.Entity<Customer>().ToTable("Customer");
+            modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<LocalEmployeeCredential>().ToTable("Employee");
 
             modelBuilder.Entity<LocalEmployeeCredential>().HasData(

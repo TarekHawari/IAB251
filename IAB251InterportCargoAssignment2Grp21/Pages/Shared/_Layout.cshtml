@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     var employeeName = Context.Session.GetString("EmployeeName");
     var employeeRole = Context.Session.GetString("EmployeeRole");
     var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
@@ -6,6 +6,9 @@
         && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
 
     var currentPath = Context.Request.Path.ToString().ToLowerInvariant();
+    
+    var customerName = Context.Session.GetString("CustomerName");
+    var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName);
 }
 
 <!DOCTYPE html>
@@ -72,6 +75,15 @@
                         </li>
                     }
 
+                    else if (isCustomerLoggedIn) 
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Quotes/CustomerDashboard">
+                                Quote Dashboard
+                            </a>
+                        </li>
+                    }
+
                     else 
                     {
                         <li class="nav-item">
@@ -110,6 +122,18 @@
                             Logout
                         </a>
                     }
+
+                    else if (isCustomerLoggedIn)
+                    {
+                        <span class="navbar-text text-light me-2">
+                            @customerName
+                        </span>
+
+                        <a class="btn btn-outline-light" asp-page="/Account/Logout">
+                            Logout
+                        </a>
+                    }
+                    
                     else
                     {
                         <a class="btn btn-outline-light" asp-page="/Account/Register">
