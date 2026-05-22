@@ -27,7 +27,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
         {
             if (!ModelState.IsValid)
                 return Page();
-
+            
             if (!validateForm())
                 return Page();
 
