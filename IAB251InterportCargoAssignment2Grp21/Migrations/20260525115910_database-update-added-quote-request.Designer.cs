@@ -2,6 +2,7 @@
 using IAB251InterportCargoAssignment2Grp21.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IAB251InterportCargoAssignment2Grp21.Migrations
 {
     [DbContext(typeof(InterportCargoContext))]
-    partial class InterportCargoContextModelSnapshot : ModelSnapshot
+    [Migration("20260525115910_database-update-added-quote-request")]
+    partial class databaseupdateaddedquoterequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.16");

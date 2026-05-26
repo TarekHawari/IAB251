@@ -1,0 +1,120 @@
+﻿@page "{requestId:int}"
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.ReviewRequestModel
+
+@{
+    ViewData["Title"] = "Review Quotation Request";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2>Review Quotation Request #@Model.QuotationRequest?.RequestId</h2>
+
+        @if (Model.QuotationRequest == null)
+        {
+            <p class="text-danger">Quotation request not found.</p>
+        }
+        else
+        {
+            <dl class="row">
+                <dt class="col-sm-3">Customer</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.CustomerName</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.CustomerEmail</dd>
+
+                <dt class="col-sm-3">Source</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.Source</dd>
+
+                <dt class="col-sm-3">Destination</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.Destination</dd>
+
+                <dt class="col-sm-3">Containers</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.NumberOfContainers</dd>
+
+                <dt class="col-sm-3">Goods Type</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.GoodsType</dd>
+
+                <dt class="col-sm-3">Package Dimensions</dt>
+                <dd class="col-sm-9">
+                    Width: @Model.QuotationRequest.PackageWidth mm,
+                    Height: @Model.QuotationRequest.PackageHeight mm
+                </dd>
+
+                <dt class="col-sm-3">Job Type</dt>
+                <dd class="col-sm-9">
+                    @Model.QuotationRequest.ImportExportType,
+                    @Model.QuotationRequest.PackingType
+                </dd>
+
+                <dt class="col-sm-3">Quarantine</dt>
+                <dd class="col-sm-9">
+                    @(Model.QuotationRequest.RequiresQuarantine ? "Yes" : "No")
+
+                    @if (Model.QuotationRequest.RequiresQuarantine)
+                    {
+                        <div class="text-muted">
+                            @Model.QuotationRequest.QuarantineDetails
+                        </div>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Fumigation</dt>
+                <dd class="col-sm-9">
+                    @(Model.QuotationRequest.RequiresFumigation ? "Yes" : "No")
+
+                    @if (Model.QuotationRequest.RequiresFumigation)
+                    {
+                        <div class="text-muted">
+                            @Model.QuotationRequest.FumigationDetails
+                        </div>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.Status</dd>
+            </dl>
+
+            @if (Model.QuotationRequest.Status == "Pending")
+            {
+                <form method="post" asp-page-handler="Accept" class="mb-3">
+                    <input type="hidden" asp-for="RequestId" />
+                    <button type="submit" class="btn btn-success">
+                        Accept Request
+                    </button>
+                </form>
+
+                <form method="post" asp-page-handler="Reject">
+                    <input type="hidden" asp-for="RequestId" />
+
+                    <div class="mb-3">
+                        <label asp-for="RejectDto.RejectionMessage" class="form-label">Rejection Reason</label>
+                        <textarea asp-for="RejectDto.RejectionMessage" class="form-control"></textarea>
+                        <span asp-validation-for="RejectDto.RejectionMessage" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger">
+                        Reject Request
+                    </button>
+
+                    <a asp-page="/Quotes/OfficerQuotes" class="btn btn-secondary ms-2">
+                        Back
+                    </a>
+                </form>
+            }
+            else
+            {
+                <p class="text-muted">
+                    This request has already been reviewed.
+                </p>
+
+                <a asp-page="/Quotes/OfficerQuotes" class="btn btn-secondary">
+                    Back
+                </a>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

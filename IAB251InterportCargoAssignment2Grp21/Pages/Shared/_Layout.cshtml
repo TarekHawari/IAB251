@@ -1,14 +1,26 @@
 ﻿﻿@{
     var employeeName = Context.Session.GetString("EmployeeName");
     var employeeRole = Context.Session.GetString("EmployeeRole");
-    var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
+
+    var customerName = Context.Session.GetString("CustomerName");
+    var customerEmail = Context.Session.GetString("CustomerEmail");
+
+
+    var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName)
+        && !string.IsNullOrWhiteSpace(customerEmail);
+
+    var isEmployee = !string.IsNullOrWhiteSpace(employeeName);
+
     var isQuotationOfficer = !string.IsNullOrWhiteSpace(employeeRole)
         && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
 
+
+    var isLoggedIn = isCustomerLoggedIn || isEmployee;
+
+
     var currentPath = Context.Request.Path.ToString().ToLowerInvariant();
     
-    var customerName = Context.Session.GetString("CustomerName");
-    var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName);
+
 }
 
 <!DOCTYPE html>
@@ -61,16 +73,16 @@
                     @if (isQuotationOfficer)
                     {
                         <li class="nav-item">
-                            <a class="nav-link @(currentPath.Contains("/quotes/officerdashboard") ? "active text-white fw-semibold" : "")"
+                            <a class="nav-link @(currentPath.StartsWith("/quotes/officerdashboard") ? "active text-white fw-semibold" : "")"
                                asp-page="/Quotes/OfficerDashboard">
                                 Quotation Dashboard
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link @(currentPath.Contains("/quotes/officerquotes") ? "active text-white fw-semibold" : "")"
+                            <a class="nav-link @(currentPath.StartsWith("/quotes/officerquotes") || currentPath.StartsWith("/quotes/reviewrequest") ? "active text-white fw-semibold" : "")"
                                asp-page="/Quotes/OfficerQuotes">
-                                View Quotes
+                                Quotation Management
                             </a>
                         </li>
                     }
@@ -78,10 +90,20 @@
                     else if (isCustomerLoggedIn) 
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Quotes/CustomerDashboard">
-                                Quote Dashboard
+                            <a class="nav-link @(currentPath.StartsWith("/quotes/customerdashboard") ? "active text-white fw-semibold" : "")"
+                               asp-page="/Quotes/CustomerDashboard">
+                                Customer Dashboard
                             </a>
                         </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link @(currentPath.StartsWith("/quotes/requestquotation") ? "active text-white fw-semibold" : "")"
+                               asp-page="/Quotes/RequestQuotation">
+                                Request Quotation
+                            </a>
+                        </li>
+
                     }
 
                     else 
@@ -115,18 +137,7 @@
                     @if (isLoggedIn)
                     {
                         <span class="navbar-text text-light me-2">
-                            @employeeName
-                        </span>
-
-                        <a class="btn btn-outline-light" asp-page="/Account/Logout">
-                            Logout
-                        </a>
-                    }
-
-                    else if (isCustomerLoggedIn)
-                    {
-                        <span class="navbar-text text-light me-2">
-                            @customerName
+                            @(isCustomerLoggedIn ? customerName : employeeName)
                         </span>
 
                         <a class="btn btn-outline-light" asp-page="/Account/Logout">

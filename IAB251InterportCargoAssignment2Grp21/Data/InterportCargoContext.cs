@@ -14,7 +14,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<LocalEmployeeCredential> LocalEmployeeCredentials { get; set; }
 
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
             modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<LocalEmployeeCredential>().ToTable("Employee");

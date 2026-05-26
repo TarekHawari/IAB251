@@ -1,9 +1,9 @@
 ﻿@page
 @model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.OfficerDashboardModel
+
 @{
     ViewData["Title"] = "Quotation Officer Dashboard";
 }
-
 
 <div class="card shadow-sm">
     <div class="card-body">
@@ -13,12 +13,12 @@
             You are logged in as @Model.EmployeeName.
         </p>
 
-        <p>
-            This page represents the quotation-related functions available to authorised quotation officers.
-        </p>
+        <div class="alert alert-info">
+            Pending quotation requests: <strong>@Model.PendingRequests.Count</strong>
+        </div>
 
-        <a asp-page="/Quotes/Index" class="btn btn-primary">
-            View Quotation Functions
+        <a asp-page="/Quotes/OfficerQuotes" class="btn btn-primary">
+            Open Quotation Management
         </a>
     </div>
 </div>

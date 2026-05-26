@@ -1,24 +1,76 @@
 @page
 @model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.CustomerDashboardModel
+
 @{
     ViewData["Title"] = "Customer Dashboard";
 }
 
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h2>Customer Dashboard</h2>
+
+        <p class="text-muted">
+            You are logged in as @Model.CustomerName.
+        </p>
+
+        <a asp-page="/Quotes/RequestQuotation" class="btn btn-primary">
+            Submit Quotation Request
+        </a>
+    </div>
+</div>
+
+@if (Model.Notifications.Any())
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4>Notifications</h4>
+
+            @foreach (var notification in Model.Notifications)
+            {
+                <div class="alert @(notification.IsRead ? "alert-secondary" : "alert-warning")">
+                    <strong>@notification.CreatedAt.ToString("dd/MM/yyyy HH:mm")</strong><br />
+                    @notification.Message
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <h2>Customer Dashboard</h2>
-@* 
-        <p class="text-muted">
-            You are logged in as @Model.CustomerFullName
-        </p> *@
+        <h4>Your Quotation Requests</h4>
 
-        <p>
-            This is your dashboard where you can manage your quotation requests.
-        </p>
-
-        @* <a asp-page="/Quotes/Index" class="btn btn-primary">
-            View Quotation Functions
-        </a> *@
+        @if (Model.QuotationRequests.Any())
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Containers</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model.QuotationRequests)
+                    {
+                        <tr>
+                            <td>@request.RequestId</td>
+                            <td>@request.Source</td>
+                            <td>@request.Destination</td>
+                            <td>@request.NumberOfContainers</td>
+                            <td>@request.Status</td>
+                            <td>@request.SubmittedAt.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-muted">You have not submitted any quotation requests yet.</p>
+        }
     </div>
 </div>

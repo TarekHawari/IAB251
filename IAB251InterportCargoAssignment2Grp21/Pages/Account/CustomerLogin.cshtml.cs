@@ -98,6 +98,8 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Account
 
         private void createSession(Customer user) {
             string fullname = $"{user.FirstName} {user.FamilyName}";
+
+            HttpContext.Session.SetInt32("CustomerId", user.CustomerId);
             HttpContext.Session.SetString("CustomerEmail", user.Email);
             HttpContext.Session.SetString("CustomerName", fullname);
 
