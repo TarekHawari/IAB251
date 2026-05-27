@@ -61,7 +61,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IHrApiClient, HrApiClient>();
 builder.Services.AddScoped<IEmployeeLoginAppService, EmployeeLoginAppService>();
 builder.Services.AddScoped<IEmployeeLoginService, EmployeeLoginService>();
-builder.Services.AddScoped<ILocalEmployeeCredentialRepository, EFEmployeeCredentialRepository>();
+builder.Services.AddScoped<ILocalEmployeeCredentialRepository, InMemoryEmployeeCredentialRepository>();
 
 builder.Services.AddDbContext<InterportCargoContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("InterportCargoDatabase")));
@@ -92,5 +92,6 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
 
 app.Run();

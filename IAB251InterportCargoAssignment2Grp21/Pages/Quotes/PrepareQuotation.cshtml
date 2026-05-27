@@ -1,0 +1,244 @@
+@page
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.PrepareQuotationModel
+@{
+    ViewData["Title"] = "Prepare Quotation";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Prepare Quotation</h2>
+    <a asp-page="/Quotes/OfficerDashboard" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+@if (Model.SubmitSuccess)
+{
+    <div class="alert alert-success">
+        <h5>✅ Quotation submitted successfully!</h5>
+        <p>Quotation <strong>@Model.SubmittedQuotationNumber</strong> sent to customer.</p>
+        <a asp-page="/Quotes/OfficerDashboard" class="btn btn-primary mt-2">Back to Dashboard</a>
+    </div>
+}
+else if (Model.SelectedRequest == null)
+{
+    @if (!Model.AcceptedRequests.Any())
+    {
+        <div class="alert alert-info">No accepted quotation requests available.</div>
+    }
+    else
+    {
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Select Accepted Request to Quote</h5>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Request #</th>
+                            <th>Customer</th>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Containers</th>
+                            <th>Submitted</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model.AcceptedRequests)
+                        {
+                            <tr>
+                                <td>#@r.RequestId</td>
+                                <td>@r.Customer?.FirstName @r.Customer?.FamilyName</td>
+                                <td>@r.Source</td>
+                                <td>@r.Destination</td>
+                                <td>@r.NumberOfContainers</td>
+                                <td>@r.SubmittedAt.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a asp-page="/Quotes/PrepareQuotation"
+                                       asp-route-requestId="@r.RequestId"
+                                       class="btn btn-primary btn-sm">Prepare Quotation</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <!-- Request Summary -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-secondary text-white">
+                    <h6 class="mb-0">Request #@Model.SelectedRequest.RequestId</h6>
+                </div>
+                <div class="card-body small">
+                    <p><strong>Customer:</strong> @Model.SelectedRequest.Customer?.FirstName @Model.SelectedRequest.Customer?.FamilyName</p>
+                    <p><strong>Email:</strong> @Model.SelectedRequest.Customer?.Email</p>
+                    <p><strong>Source:</strong> @Model.SelectedRequest.Source</p>
+                    <p><strong>Destination:</strong> @Model.SelectedRequest.Destination</p>
+                    <p><strong>Containers:</strong> @Model.SelectedRequest.NumberOfContainers</p>
+                    <p><strong>Package:</strong> @Model.SelectedRequest.PackageNature</p>
+                    <p><strong>Import:</strong> @(Model.SelectedRequest.IsImport ? "Yes" : "No")</p>
+                    <p><strong>Export:</strong> @(Model.SelectedRequest.IsExport ? "Yes" : "No")</p>
+                    <p><strong>Packing:</strong> @(Model.SelectedRequest.RequiresPacking ? "Yes" : "No")</p>
+                    <p><strong>Unpacking:</strong> @(Model.SelectedRequest.RequiresUnpacking ? "Yes" : "No")</p>
+                    <p><strong>Quarantine:</strong> @(Model.SelectedRequest.RequiresQuarantine ? "Yes" : "No")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rate Schedule Form -->
+        <div class="col-md-8">
+
+            @if (Model.ShowDiscountAlert)
+            {
+                <div class="alert alert-warning border border-warning mb-3">
+                    <h6>💡 Discount Opportunity Detected</h6>
+                    <p class="mb-1">@Model.DiscountReason</p>
+                    <p class="mb-2"><strong>Suggested discount: @Model.SuggestedDiscountPercent%</strong></p>
+                    <form method="post" class="d-inline">
+                        <input type="hidden" name="requestId" value="@Model.SelectedRequest.RequestId" />
+                        @foreach (var f in Model.FormSnapshot)
+                        {
+                            <input type="hidden" name="@f.Key" value="@f.Value" />
+                        }
+                        <button type="submit" asp-page-handler="ApplyDiscount"
+                                class="btn btn-success btn-sm me-2">Apply Discount</button>
+                    </form>
+                    <form method="post" class="d-inline">
+                        <input type="hidden" name="requestId" value="@Model.SelectedRequest.RequestId" />
+                        @foreach (var f in Model.FormSnapshot)
+                        {
+                            <input type="hidden" name="@f.Key" value="@f.Value" />
+                        }
+                        <button type="submit" asp-page-handler="DeclineDiscount"
+                                class="btn btn-outline-secondary btn-sm">Decline Discount</button>
+                    </form>
+                </div>
+            }
+
+            @if (Model.DiscountApplied)
+            {
+                <div class="alert alert-success py-2 mb-3">
+                    ✅ Discount of @Model.SuggestedDiscountPercent% will be applied.
+                </div>
+            }
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Rate Schedule</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <input type="hidden" name="requestId" value="@Model.SelectedRequest.RequestId" />
+                        @if (Model.DiscountApplied)
+                        {
+                            <input type="hidden" name="discountPercent" value="@Model.SuggestedDiscountPercent" />
+                            <input type="hidden" name="discountReason" value="@Model.DiscountReason" />
+                        }
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Container Type</label>
+                                <select name="containerType" class="form-select" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="20ft">20ft</option>
+                                    <option value="40ft">40ft</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Scope / Job Description</label>
+                                <textarea name="scope" class="form-control" rows="2"
+                                          placeholder="Describe the scope..." required></textarea>
+                            </div>
+                        </div>
+
+                        <h6 class="text-primary mb-2">Select Applicable Charges</h6>
+                        <table class="table table-bordered table-sm mb-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Charge</th>
+                                    <th>20ft Rate</th>
+                                    <th>40ft Rate</th>
+                                    <th>Include?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Warf Booking Fee</td>
+                                    <td>$60</td><td>$70</td>
+                                    <td><input type="checkbox" name="includeWarfBooking" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Lift On / Lift Off</td>
+                                    <td>$80</td><td>$120</td>
+                                    <td><input type="checkbox" name="includeLiftOnOff" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Fumigation</td>
+                                    <td>$220</td><td>$280</td>
+                                    <td><input type="checkbox" name="includeFumigation" /></td>
+                                </tr>
+                                <tr>
+                                    <td>LCL Delivery Depot</td>
+                                    <td>$400</td><td>$500</td>
+                                    <td><input type="checkbox" name="includeLCL" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Tailgate Inspection</td>
+                                    <td>$120</td><td>$160</td>
+                                    <td><input type="checkbox" name="includeTailgate" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Storage Fee</td>
+                                    <td>$240</td><td>$300</td>
+                                    <td><input type="checkbox" name="includeStorage" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Facility Fee</td>
+                                    <td>$70</td><td>$100</td>
+                                    <td><input type="checkbox" name="includeFacility" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Warf Inspection</td>
+                                    <td>$60</td><td>$90</td>
+                                    <td><input type="checkbox" name="includeWarfInspection" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-secondary py-2 small">
+                            <strong>Note:</strong> GST (10%) will be automatically added to the total.
+                        </div>
+
+                        <div class="d-flex gap-2 mt-3">
+                            <button type="submit" asp-page-handler="Preview"
+                                    class="btn btn-outline-primary">Preview Total</button>
+                            <button type="submit" asp-page-handler="Submit"
+                                    class="btn btn-success">Submit Quotation</button>
+                        </div>
+                    </form>
+
+                    @if (Model.PreviewTotal > 0)
+                    {
+                        <div class="alert alert-info mt-3">
+                            <h6>📋 Quotation Preview</h6>
+                            <p>Subtotal: <strong>$@Model.PreviewSubtotal.ToString("F2")</strong></p>
+                            @if (Model.DiscountApplied)
+                            {
+                                <p>Discount (@Model.SuggestedDiscountPercent%):
+                                    <strong>-$@Model.DiscountAmount.ToString("F2")</strong></p>
+                            }
+                            <p>GST (10%): <strong>$@Model.GSTAmount.ToString("F2")</strong></p>
+                            <p class="fs-5 mb-0">Total (inc. GST):
+                                <strong>$@Model.PreviewTotal.ToString("F2")</strong></p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

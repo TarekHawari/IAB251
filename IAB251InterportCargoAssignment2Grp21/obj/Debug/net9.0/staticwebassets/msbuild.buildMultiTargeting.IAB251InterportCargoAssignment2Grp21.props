@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\IAB251InterportCargoAssignment2Grp21.props" />
+</Project>
