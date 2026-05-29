@@ -24,7 +24,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Data
               {
                   LocalEmployeeCredentialId = 1,
                   Email = "t.williams@company.com",
-                  EmployeeKey = "QUOTE123"
+                  EmployeeKey = "$2a$11$HiTNiU8zE0EKIsFF0VcJheN74BbrxHVgDT9EjU8/ZhtdeLbR9LFNK"
               }
           );
         }

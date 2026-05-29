@@ -33,6 +33,10 @@ namespace InterportCargo.QuotationService.Models
         // 20 Feet or 40 Feet
 
         [Required]
+        [StringLength(100)]
+        public string PreparedByEmployeeEmail { get; set; } = string.Empty;
+
+        [Required]
         [StringLength(500)]
         public string ScopeDescription { get; set; } = string.Empty;
 

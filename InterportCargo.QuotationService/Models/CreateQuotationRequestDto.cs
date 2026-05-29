@@ -25,10 +25,10 @@ namespace InterportCargo.QuotationService.Models
         [Required]
         public string GoodsType { get; set; } = string.Empty;
 
-        [Range(0.01, 1000)]
+        [Range(0.01, 10000)]
         public decimal PackageWidth { get; set; }
 
-        [Range(0.01, 1000)]
+        [Range(0.01, 10000)]
         public decimal PackageHeight { get; set; }
 
         [Required]

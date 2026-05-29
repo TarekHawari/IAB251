@@ -69,6 +69,7 @@ builder.Services.AddDbContext<InterportCargoContext>(options =>
 builder.Services.AddAuthentication("Cookies").AddCookie();
 
 
+Console.WriteLine(BCrypt.Net.BCrypt.HashPassword("QUOTE123"));
 
 var app = builder.Build();
 

@@ -28,7 +28,7 @@ namespace IAB251InterportCargoAssignment2Grp21.BusinessLogic.Services
                 return Failed();
             }
 
-            if (!localCredential.EmployeeKey.Equals(employeeKey, StringComparison.Ordinal))
+            if (!BCrypt.Net.BCrypt.Verify(employeeKey, localCredential.EmployeeKey))
             {
                 return Failed();
             }

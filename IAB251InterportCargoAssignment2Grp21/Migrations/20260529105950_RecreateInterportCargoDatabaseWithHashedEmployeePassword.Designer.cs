@@ -2,6 +2,7 @@
 using IAB251InterportCargoAssignment2Grp21.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IAB251InterportCargoAssignment2Grp21.Migrations
 {
     [DbContext(typeof(InterportCargoContext))]
-    partial class InterportCargoContextModelSnapshot : ModelSnapshot
+    [Migration("20260529105950_RecreateInterportCargoDatabaseWithHashedEmployeePassword")]
+    partial class RecreateInterportCargoDatabaseWithHashedEmployeePassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.16");
@@ -86,7 +89,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Migrations
                         {
                             LocalEmployeeCredentialId = 1,
                             Email = "t.williams@company.com",
-                            EmployeeKey = "$2a$11$HiTNiU8zE0EKIsFF0VcJheN74BbrxHVgDT9EjU8/ZhtdeLbR9LFNK"
+                            EmployeeKey = "$2a$11$6CnzNEQoVI3kEIvjTFQ3suP3Ynf2WrqLFPLnheBXWqhNAER3eypj2"
                         });
                 });
 #pragma warning restore 612, 618
