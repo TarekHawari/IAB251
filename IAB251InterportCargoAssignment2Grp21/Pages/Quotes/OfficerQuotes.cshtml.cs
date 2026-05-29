@@ -13,8 +13,12 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
         {
             _quotationServiceClient = quotationServiceClient;
         }
-
+        
+        
         public List<QuotationRequestDto> Requests { get; set; } = new();
+
+        public List<QuotationDto> Quotations { get; set; } = new();
+
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -33,6 +37,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
             }
 
             Requests = await _quotationServiceClient.GetAllAsync();
+            Quotations = await _quotationServiceClient.GetAllQuotationsAsync();
 
             return Page();
         }

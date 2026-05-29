@@ -12,9 +12,12 @@ namespace InterportCargo.QuotationService.Data
 
         public DbSet<QuotationRequest> QuotationRequests { get; set; }
 
+        public DbSet<Quotation> Quotations { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<QuotationRequest>().ToTable("QuotationRequests");
+            modelBuilder.Entity<Quotation>().ToTable("Quotations");
         }
     }
 }

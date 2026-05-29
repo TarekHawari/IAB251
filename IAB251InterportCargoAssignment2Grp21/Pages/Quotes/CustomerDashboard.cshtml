@@ -74,3 +74,49 @@
         }
     </div>
 </div>
+
+
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h4>Your Quotations</h4>
+
+        @if (Model.Quotations.Any())
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Quotation Number</th>
+                        <th>Date Issued</th>
+                        <th>Container Type</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var quotation in Model.Quotations)
+                    {
+                        <tr>
+                            <td>@quotation.QuotationNumber</td>
+                            <td>@quotation.DateIssued.ToString("dd/MM/yyyy")</td>
+                            <td>@quotation.ContainerType</td>
+                            <td>@quotation.TotalAmount.ToString("C")</td>
+                            <td>@quotation.Status</td>
+                            <td>
+                                <a asp-page="/Quotes/ViewQuotation"
+                                   asp-route-quotationId="@quotation.QuotationId"
+                                   class="btn btn-sm btn-primary">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-muted">No quotations have been sent to you yet.</p>
+        }
+    </div>
+</div>

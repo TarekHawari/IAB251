@@ -153,12 +153,13 @@ namespace InterportCargo.QuotationService.Controllers
 
             var notification = new CreateNotificationRequest
             {
+                RecipientType = "Customer",
                 CustomerId = request.CustomerId,
                 QuotationRequestId = request.RequestId,
                 Message = $"Your quotation request #{request.RequestId} from {request.Source} to {request.Destination} was rejected. Reason: {dto.RejectionMessage}"
             };
 
-            await _notificationServiceClient.SendRejectionNotificationAsync(notification);
+            await _notificationServiceClient.SendNotificationAsync(notification);
 
             return NoContent();
         }

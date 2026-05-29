@@ -25,10 +25,10 @@ namespace IAB251InterportCargoAssignment2Grp21.Models
         [Required(ErrorMessage = "Goods type is required.")]
         public string GoodsType { get; set; } = string.Empty;
 
-        [Range(0.01, 100000, ErrorMessage = "Package width must be entered in millimetres and must be greater than 0.")]
+        [Range(0.01, 1000, ErrorMessage = "Package width must be entered in millimetres and must be greater than 0.")]
         public decimal PackageWidth { get; set; }
 
-        [Range(0.01, 100000, ErrorMessage = "Package height must be entered in millimetres and must be greater than 0.")]
+        [Range(0.01, 1000, ErrorMessage = "Package height must be entered in millimetres and must be greater than 0.")]
         public decimal PackageHeight { get; set; }
 
 

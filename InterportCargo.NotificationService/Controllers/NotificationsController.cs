@@ -20,12 +20,26 @@ namespace InterportCargo.NotificationService.Controllers
         public async Task<ActionResult<List<CustomerNotification>>> GetByCustomerId(int customerId)
         {
             var notifications = await _context.CustomerNotifications
-                .Where(n => n.CustomerId == customerId)
+                .Where(n => n.RecipientType == "Customer" && n.CustomerId == customerId)
                 .OrderByDescending(n => n.CreatedAt)
                 .ToListAsync();
 
             return Ok(notifications);
         }
+
+
+
+        [HttpGet("officer/{employeeEmail}")]
+        public async Task<ActionResult<List<CustomerNotification>>> GetByOfficerEmail(string employeeEmail)
+        {
+            var notifications = await _context.CustomerNotifications
+                .Where(n => n.RecipientType == "Officer" && n.EmployeeEmail == employeeEmail)
+                .OrderByDescending(n => n.CreatedAt)
+                .ToListAsync();
+
+            return Ok(notifications);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateNotificationRequestDto request)
@@ -35,10 +49,26 @@ namespace InterportCargo.NotificationService.Controllers
                 return BadRequest(ModelState);
             }
 
+
+            if (request.RecipientType == "Customer" && request.CustomerId == null)
+            {
+                return BadRequest("CustomerId is required for customer notifications.");
+            }
+
+
+            if (request.RecipientType == "Officer" && string.IsNullOrWhiteSpace(request.EmployeeEmail))
+            {
+                return BadRequest("EmployeeEmail is required for officer notifications.");
+            }
+
+
             var notification = new CustomerNotification
             {
+                RecipientType = request.RecipientType,
                 CustomerId = request.CustomerId,
+                EmployeeEmail = request.EmployeeEmail,
                 QuotationRequestId = request.QuotationRequestId,
+                QuotationId = request.QuotationId,
                 Message = request.Message,
                 IsRead = false,
                 CreatedAt = DateTime.Now

@@ -76,12 +76,11 @@
 
             @if (Model.QuotationRequest.Status == "Pending")
             {
-                <form method="post" asp-page-handler="Accept" class="mb-3">
-                    <input type="hidden" asp-for="RequestId" />
-                    <button type="submit" class="btn btn-success">
-                        Accept Request
-                    </button>
-                </form>
+                <a asp-page="/Quotes/PrepareQuotation"
+                   asp-route-requestId="@Model.QuotationRequest.RequestId"
+                   class="btn btn-success mb-3">
+                    Prepare Quotation
+                </a>
 
                 <form method="post" asp-page-handler="Reject">
                     <input type="hidden" asp-for="RequestId" />

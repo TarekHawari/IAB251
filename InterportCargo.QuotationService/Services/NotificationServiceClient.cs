@@ -12,7 +12,7 @@ namespace InterportCargo.QuotationService.Services
             _httpClient = httpClientFactory.CreateClient("notification-api");
         }
 
-        public async Task SendRejectionNotificationAsync(CreateNotificationRequest request)
+        public async Task SendNotificationAsync(CreateNotificationRequest request)
         {
             var response = await _httpClient.PostAsJsonAsync("api/notifications", request);
             response.EnsureSuccessStatusCode();

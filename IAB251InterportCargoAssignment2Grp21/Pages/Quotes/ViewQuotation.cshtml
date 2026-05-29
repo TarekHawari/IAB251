@@ -1,0 +1,70 @@
+﻿@page "{quotationId:int}"
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.ViewQuotationModel
+
+@{
+    ViewData["Title"] = "View Quotation";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        @if (Model.Quotation == null)
+        {
+            <p class="text-danger">Quotation not found.</p>
+        }
+        else
+        {
+            <h2>Quotation @Model.Quotation.QuotationNumber</h2>
+
+            <p class="text-muted">
+                Date issued: @Model.Quotation.DateIssued.ToString("dd/MM/yyyy")
+            </p>
+
+            <h5>Scope</h5>
+            <p>@Model.Quotation.ScopeDescription</p>
+
+            <h5>Charges</h5>
+
+            <table class="table table-bordered">
+                <tbody>
+                    <tr><th>Wharf Booking Fee</th><td>@Model.Quotation.WharfBookingFee.ToString("C")</td></tr>
+                    <tr><th>Lift On / Lift Off</th><td>@Model.Quotation.LiftOnLiftOffFee.ToString("C")</td></tr>
+                    <tr><th>Fumigation</th><td>@Model.Quotation.FumigationFee.ToString("C")</td></tr>
+                    <tr><th>LCL Delivery Depot</th><td>@Model.Quotation.LclDeliveryDepotFee.ToString("C")</td></tr>
+                    <tr><th>Tailgate Inspection</th><td>@Model.Quotation.TailgateInspectionFee.ToString("C")</td></tr>
+                    <tr><th>Storage Fee</th><td>@Model.Quotation.StorageFee.ToString("C")</td></tr>
+                    <tr><th>Facility Fee</th><td>@Model.Quotation.FacilityFee.ToString("C")</td></tr>
+                    <tr><th>Wharf Inspection</th><td>@Model.Quotation.WharfInspectionFee.ToString("C")</td></tr>
+                    <tr><th>Subtotal</th><td>@Model.Quotation.SubtotalBeforeDiscount.ToString("C")</td></tr>
+                    <tr><th>Discount</th><td>-@Model.Quotation.DiscountAmount.ToString("C")</td></tr>
+                    <tr><th>GST</th><td>@Model.Quotation.GstAmount.ToString("C")</td></tr>
+                    <tr class="table-light"><th>Total</th><td><strong>@Model.Quotation.TotalAmount.ToString("C")</strong></td></tr>
+                </tbody>
+            </table>
+
+            <p>
+                <strong>Status:</strong> @Model.Quotation.Status
+            </p>
+
+            @if (Model.Quotation.Status == "Pending")
+            {
+                <form method="post" asp-page-handler="Accept" class="d-inline">
+                    <input type="hidden" asp-for="QuotationId" />
+                    <button type="submit" class="btn btn-success">
+                        Accept Quotation
+                    </button>
+                </form>
+
+                <form method="post" asp-page-handler="Reject" class="d-inline">
+                    <input type="hidden" asp-for="QuotationId" />
+                    <button type="submit" class="btn btn-danger ms-2">
+                        Reject Quotation
+                    </button>
+                </form>
+            }
+
+            <a asp-page="/Quotes/CustomerDashboard" class="btn btn-secondary ms-2">
+                Back to Dashboard
+            </a>
+        }
+    </div>
+</div>

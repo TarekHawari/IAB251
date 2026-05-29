@@ -18,6 +18,11 @@ namespace IAB251InterportCargoAssignment2Grp21.Services
                 ?? new List<CustomerNotificationDto>();
         }
 
+        public async Task<List<CustomerNotificationDto>> GetByOfficerEmailAsync(string employeeEmail)
+        {
+            return await _httpClient.GetFromJsonAsync<List<CustomerNotificationDto>>($"api/notifications/officer/{employeeEmail}")
+                ?? new List<CustomerNotificationDto>();
+        }
         public async Task MarkAsReadAsync(int notificationId)
         {
             var response = await _httpClient.PutAsync($"api/notifications/{notificationId}/read", null);

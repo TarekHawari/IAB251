@@ -5,10 +5,15 @@ namespace InterportCargo.NotificationService.Models
     public class CreateNotificationRequestDto
     {
         [Required]
-        public int CustomerId { get; set; }
+        public string RecipientType { get; set; } = "Customer";
 
-        [Required]
-        public int QuotationRequestId { get; set; }
+        public int? CustomerId { get; set; }
+
+        public string? EmployeeEmail { get; set; }
+
+        public int? QuotationRequestId { get; set; }
+
+        public int? QuotationId { get; set; }
 
         [Required]
         [StringLength(500)]

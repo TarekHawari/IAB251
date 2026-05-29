@@ -1,0 +1,102 @@
+﻿@page "{requestId:int}"
+@model IAB251InterportCargoAssignment2Grp21.Pages.Quotes.PrepareQuotationModel
+
+@{
+    ViewData["Title"] = "Prepare Quotation";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2>Prepare Quotation</h2>
+
+        @if (Model.QuotationRequest == null)
+        {
+            <p class="text-danger">Quotation request not found.</p>
+        }
+        else
+        {
+            <h5>Customer Request Summary</h5>
+
+            <dl class="row">
+                <dt class="col-sm-3">Customer</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.CustomerName</dd>
+
+                <dt class="col-sm-3">Source</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.Source</dd>
+
+                <dt class="col-sm-3">Destination</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.Destination</dd>
+
+                <dt class="col-sm-3">Containers</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.NumberOfContainers</dd>
+
+                <dt class="col-sm-3">Goods Type</dt>
+                <dd class="col-sm-9">@Model.QuotationRequest.GoodsType</dd>
+
+                <dt class="col-sm-3">Quarantine</dt>
+                <dd class="col-sm-9">@(Model.QuotationRequest.RequiresQuarantine ? "Yes" : "No")</dd>
+
+                <dt class="col-sm-3">Fumigation</dt>
+                <dd class="col-sm-9">@(Model.QuotationRequest.RequiresFumigation ? "Yes" : "No")</dd>
+            </dl>
+
+            @if (Model.EligibleDiscountPercentage > 0)
+            {
+                <div class="alert alert-warning">
+                    This quotation request is eligible for a potential
+                    <strong>@Model.EligibleDiscountPercentage%</strong> discount.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-secondary">
+                    No discount is available for this quotation request.
+                </div>
+            }
+
+            <form method="post">
+                <input type="hidden" asp-for="RequestId" />
+
+                <div class="mb-3">
+                    <label asp-for="Quotation.ContainerType" class="form-label">Container Type</label>
+                    <select asp-for="Quotation.ContainerType" class="form-select">
+                        <option value="">Select container type</option>
+                        <option value="20 Feet">20 Feet</option>
+                        <option value="40 Feet">40 Feet</option>
+                    </select>
+                    <span asp-validation-for="Quotation.ContainerType" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Quotation.ScopeDescription" class="form-label">Scope / Job Description</label>
+                    <textarea asp-for="Quotation.ScopeDescription"
+                              class="form-control"
+                              placeholder="Describe the scope of the job and freight handling requirements."></textarea>
+                    <span asp-validation-for="Quotation.ScopeDescription" class="text-danger"></span>
+                </div>
+
+                @if (Model.EligibleDiscountPercentage > 0)
+                {
+                    <div class="form-check mb-3">
+                        <input asp-for="Quotation.ApplyDiscount" class="form-check-input" />
+                        <label asp-for="Quotation.ApplyDiscount" class="form-check-label">
+                            Apply eligible @Model.EligibleDiscountPercentage% discount
+                        </label>
+                    </div>
+                }
+
+                <button type="submit" class="btn btn-primary">
+                    Submit Quotation to Customer
+                </button>
+
+                <a asp-page="/Quotes/OfficerQuotes" class="btn btn-secondary ms-2">
+                    Cancel
+                </a>
+            </form>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

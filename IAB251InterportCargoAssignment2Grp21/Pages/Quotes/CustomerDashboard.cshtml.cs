@@ -24,6 +24,8 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
 
         public List<QuotationRequestDto> QuotationRequests { get; set; } = new();
 
+        public List<QuotationDto> Quotations { get; set; } = new();
+
         public async Task<IActionResult> OnGetAsync()
         {
             var customerId = HttpContext.Session.GetInt32("CustomerId");
@@ -37,6 +39,7 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
 
             Notifications = await _notificationServiceClient.GetByCustomerIdAsync(customerId.Value);
             QuotationRequests = await _quotationServiceClient.GetByCustomerIdAsync(customerId.Value);
+            Quotations = await _quotationServiceClient.GetQuotationsByCustomerIdAsync(customerId.Value);
 
             return Page();
         }

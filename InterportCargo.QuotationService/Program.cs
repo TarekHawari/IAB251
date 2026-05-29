@@ -24,7 +24,10 @@ builder.Services.AddHttpClient("notification-api", client =>
     client.BaseAddress = new Uri(notificationServiceUrl);
 });
 
+//Initiate Services
 builder.Services.AddScoped<NotificationServiceClient>();
+builder.Services.AddScoped<RateScheduleService>();
+builder.Services.AddScoped<DiscountService>();
 
 var app = builder.Build();
 

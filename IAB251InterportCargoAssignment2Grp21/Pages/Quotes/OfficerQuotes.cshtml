@@ -7,7 +7,7 @@
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <h2>Quotation Management</h2>
+        <h2>Quotation Requests</h2>
 
         @if (Model.Requests.Any())
         {
@@ -51,5 +51,43 @@
         {
             <p class="text-muted">No quotation requests have been submitted yet.</p>
         }
+
+        <hr class="my-4" />
+
+        <h3>Prepared Quotations</h3>
+
+        @if (Model.Quotations.Any())
+        {
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Quotation Number</th>
+                        <th>Client Name</th>
+                        <th>Date Issued</th>
+                        <th>Container Type</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var quotation in Model.Quotations)
+                    {
+                        <tr>
+                            <td>@quotation.QuotationNumber</td>
+                            <td>@quotation.CustomerName</td>
+                            <td>@quotation.DateIssued.ToString("dd/MM/yyyy")</td>
+                            <td>@quotation.ContainerType</td>
+                            <td>@quotation.TotalAmount.ToString("C")</td>
+                            <td>@quotation.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-muted">No quotations have been prepared yet.</p>
+        }
+
     </div>
 </div>

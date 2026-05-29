@@ -22,3 +22,20 @@
         </a>
     </div>
 </div>
+
+@if (Model.OfficerNotifications.Any())
+{
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <h4>Officer Notifications</h4>
+
+            @foreach (var notification in Model.OfficerNotifications)
+            {
+                <div class="alert @(notification.IsRead ? "alert-secondary" : "alert-info")">
+                    <strong>@notification.CreatedAt.ToString("dd/MM/yyyy HH:mm")</strong><br />
+                    @notification.Message
+                </div>
+            }
+        </div>
+    </div>
+}
