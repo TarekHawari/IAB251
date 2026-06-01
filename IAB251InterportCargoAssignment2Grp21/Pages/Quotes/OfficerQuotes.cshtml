@@ -33,14 +33,44 @@
                             <td>@request.Source</td>
                             <td>@request.Destination</td>
                             <td>@request.NumberOfContainers</td>
-                            <td>@request.Status</td>
+                            <td>
+
+                                @if (request.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                }
+                                else if (request.Status == "Rejected")
+                                {
+                                    <span class="badge bg-danger">Rejected</span>
+                                }
+                                else if (request.Status == "QuotationPrepared")
+                                {
+                                    <span class="badge bg-success">Accepted</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@request.Status</span>
+                                }
+
+                            </td>
                             <td>@request.SubmittedAt.ToString("dd/MM/yyyy")</td>
                             <td>
-                                <a asp-page="/Quotes/ReviewRequest"
-                                   asp-route-requestId="@request.RequestId"
-                                   class="btn btn-sm btn-primary">
-                                    Review
-                                </a>
+                                @if (request.Status == "Pending")
+                                {
+                                    <a asp-page="/Quotes/ReviewRequest"
+                                       asp-route-requestId="@request.RequestId"
+                                       class="btn btn-sm btn-primary">
+                                        Review
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-page="/Quotes/ReviewRequest"
+                                       asp-route-requestId="@request.RequestId"
+                                       class="btn btn-sm btn-secondary">
+                                        Reviewed
+                                    </a>
+                                }
                             </td>
                         </tr>
                     }

@@ -14,11 +14,11 @@
                 <h2 class="card-title mb-3">Sign out?</h2>
 
                 <p class="text-muted">
-                    You are currently signed in as @Model.EmployeeName.
+                    You are currently signed in as @Model.DisplayName.
                 </p>
 
                 <p>
-                    Returning to the public home page will sign you out of the quotation officer portal.
+                    Returning to the public home page will sign you out of the @Model.PortalName.
                 </p>
 
                 <form method="post" class="d-flex gap-2 mt-4">
@@ -26,7 +26,7 @@
                         Sign out and return home
                     </button>
 
-                    <a asp-page="/Quotes/OfficerDashboard" class="btn btn-secondary">
+                    <a asp-page="@Model.ReturnPage" class="btn btn-secondary">
                         Stay signed in
                     </a>
                 </form>

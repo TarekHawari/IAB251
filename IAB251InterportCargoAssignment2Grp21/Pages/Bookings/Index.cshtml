@@ -5,7 +5,21 @@
     ViewData["Title"] = "Booking";
 
     var employeeName = HttpContext.Session.GetString("EmployeeName");
-    var isLoggedIn = !string.IsNullOrWhiteSpace(employeeName);
+    var employeeRole = HttpContext.Session.GetString("EmployeeRole");
+
+    var customerName = HttpContext.Session.GetString("CustomerName");
+    var customerEmail = HttpContext.Session.GetString("CustomerEmail");
+
+    var isCustomerLoggedIn = !string.IsNullOrWhiteSpace(customerName)
+    && !string.IsNullOrWhiteSpace(customerEmail);
+
+    var isQuotationOfficer = !string.IsNullOrWhiteSpace(employeeRole)
+        && employeeRole.Replace(" ", "").Trim().ToLowerInvariant() == "quotationofficer";
+
+    var isLoggedIn = isQuotationOfficer || isCustomerLoggedIn;
+
+
+
 }
 
 <div class="row justify-content-center">
@@ -16,20 +30,36 @@
 
                 <h2 class="card-title">Booking Management</h2>
 
-                @if (isLoggedIn)
+                @if (isCustomerLoggedIn)
+                {
+                    <p class="text-muted">
+                        Welcome, @customerName. Booking functions are recognised as part of the wider InterportCargo enterprise system.
+                    </p>
+
+                    <p>
+                        Booking functionality is outside the current developmental prototype scope and will be implemented in a later iteration.
+                    </p>
+                    
+                    <a asp-page="/Quotes/CustomerDashboard" class="btn btn-primary">
+                        Return to Customer Dashboard
+                    </a>
+                }
+
+                else if (isQuotationOfficer)
                 {
                     <p class="text-muted">
                         Welcome, @employeeName. Booking functions are recognised as part of the wider InterportCargo enterprise system.
                     </p>
 
                     <p>
-                        Booking functionality is outside the current Sprint 1 quotation prototype scope and will be implemented in a later iteration.
+                        Booking functionality is outside the current developmental prototype scope and will be implemented in a later iteration.
                     </p>
 
                     <a asp-page="/Quotes/OfficerDashboard" class="btn btn-primary">
                         Return to Quotation Dashboard
                     </a>
                 }
+
                 else
                 {
                     <p class="text-muted">

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="MSTest" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExternalSystems\HRSystem\HRSystem\HRSystem.csproj" />
+    <ProjectReference Include="..\IAB251InterportCargoAssignment2Grp21\IAB251InterportCargoAssignment2Grp21.csproj" />
+    <ProjectReference Include="..\InterportCargo.NotificationService\InterportCargo.NotificationService.csproj" />
+    <ProjectReference Include="..\InterportCargo.QuotationService\InterportCargo.QuotationService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+</Project>

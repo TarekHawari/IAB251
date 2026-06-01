@@ -31,11 +31,11 @@ namespace InterportCargo.QuotationService.Models
         public string GoodsType { get; set; } = string.Empty;
 
         [Required]
-        [Range(0.01, 1000)]
+        [Range(0.01, 10000)]
         public decimal PackageWidth { get; set; }
 
         [Required]
-        [Range(0.01, 1000)]
+        [Range(0.01, 10000)]
         public decimal PackageHeight { get; set; }
 
         [Required]

@@ -133,6 +133,7 @@ namespace InterportCargo.QuotationService.Controllers
                 CustomerId = request.CustomerId,
                 CustomerName = request.CustomerName,
                 CustomerEmail = request.CustomerEmail,
+                PreparedByEmployeeEmail = dto.PreparedByEmployeeEmail,
                 DateIssued = DateTime.Now,
                 ContainerType = dto.ContainerType,
                 ScopeDescription = dto.ScopeDescription,
@@ -192,7 +193,7 @@ namespace InterportCargo.QuotationService.Controllers
             await _notificationServiceClient.SendNotificationAsync(new CreateNotificationRequest
             {
                 RecipientType = "Officer",
-                EmployeeEmail = "t.williams@company.com",
+                EmployeeEmail = quotation.PreparedByEmployeeEmail,
                 QuotationId = quotation.QuotationId,
                 QuotationRequestId = quotation.QuotationRequestId,
                 Message = $"Customer {quotation.CustomerName} accepted quotation {quotation.QuotationNumber}."

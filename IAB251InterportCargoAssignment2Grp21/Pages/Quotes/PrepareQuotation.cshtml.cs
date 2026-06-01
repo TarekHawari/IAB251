@@ -64,8 +64,14 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
                 return Page();
             }
 
-            Quotation.PreparedByEmployeeEmail =
-                HttpContext.Session.GetString("EmployeeEmail") ?? "t.williams@company.com";
+            var employeeEmail = HttpContext.Session.GetString("EmployeeEmail");
+
+            if (string.IsNullOrWhiteSpace(employeeEmail))
+            {
+                return RedirectToPage("/Account/EmployeeLogin");
+            }
+
+            Quotation.PreparedByEmployeeEmail = employeeEmail;
 
             await _quotationServiceClient.PrepareQuotationAsync(RequestId, Quotation);
 
