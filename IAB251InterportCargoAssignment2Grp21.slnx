@@ -6,4 +6,5 @@
   <Project Path="IAB251InterportCargoAssignment2Grp21/IAB251InterportCargoAssignment2Grp21.csproj" />
   <Project Path="InterportCargo.NotificationService/InterportCargo.NotificationService.csproj" Id="be03bf04-4614-489d-8401-b0a65a03b0da" />
   <Project Path="InterportCargo.QuotationService/InterportCargo.QuotationService.csproj" Id="b5ac2b0c-13bf-4f52-99fb-1ca91afba8fa" />
+  <Project Path="InterportCargoTestSuite/InterportCargoTestSuite.csproj" Id="c047cf66-e09c-48c5-bad4-6c6a432d1472" />
 </Solution>
