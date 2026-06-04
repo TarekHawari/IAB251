@@ -44,27 +44,30 @@
             <p>
                 <strong>Status:</strong> @Model.Quotation.Status
             </p>
-
-            @if (Model.Quotation.Status == "Pending")
+            
+            @if (Model.isCustomer) 
             {
-                <form method="post" asp-page-handler="Accept" class="d-inline">
-                    <input type="hidden" asp-for="QuotationId" />
-                    <button type="submit" class="btn btn-success">
-                        Accept Quotation
-                    </button>
-                </form>
+                @if (Model.Quotation.Status == "Pending")
+                {
+                    <form method="post" asp-page-handler="Accept" class="d-inline">
+                        <input type="hidden" asp-for="QuotationId" />
+                        <button type="submit" class="btn btn-success">
+                            Accept Quotation
+                        </button>
+                    </form>
 
-                <form method="post" asp-page-handler="Reject" class="d-inline">
-                    <input type="hidden" asp-for="QuotationId" />
-                    <button type="submit" class="btn btn-danger ms-2">
-                        Reject Quotation
-                    </button>
-                </form>
+                    <form method="post" asp-page-handler="Reject" class="d-inline">
+                        <input type="hidden" asp-for="QuotationId" />
+                        <button type="submit" class="btn btn-danger ms-2">
+                            Reject Quotation
+                        </button>
+                    </form>
+                }
+
+                <a asp-page="/Quotes/CustomerDashboard" class="btn btn-secondary ms-2">
+                    Back to Dashboard
+                </a>
             }
-
-            <a asp-page="/Quotes/CustomerDashboard" class="btn btn-secondary ms-2">
-                Back to Dashboard
-            </a>
         }
     </div>
 </div>

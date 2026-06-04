@@ -103,7 +103,7 @@
                     @foreach (var quotation in Model.Quotations)
                     {
                         <tr>
-                            <td>@quotation.QuotationNumber</td>
+                            <td> <a href="/Quotes/ViewQuotation/@quotation.QuotationId"> @quotation.QuotationNumber </a> </td>
                             <td>@quotation.CustomerName</td>
                             <td>@quotation.DateIssued.ToString("dd/MM/yyyy")</td>
                             <td>@quotation.ContainerType</td>

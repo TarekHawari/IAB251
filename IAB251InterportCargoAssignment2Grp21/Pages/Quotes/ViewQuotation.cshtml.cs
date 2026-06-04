@@ -18,19 +18,32 @@ namespace IAB251InterportCargoAssignment2Grp21.Pages.Quotes
         public int QuotationId { get; set; }
 
         public QuotationDto? Quotation { get; set; }
+        
+        public bool isCustomer {get; set;}
 
         public async Task<IActionResult> OnGetAsync()
         {
             var customerId = HttpContext.Session.GetInt32("CustomerId");
+            var employeeRole = HttpContext.Session.GetString("EmployeeRole");
 
-            if (customerId == null)
+            isCustomer = customerId != null;
+
+            if (customerId == null && employeeRole == null)
             {
-                return RedirectToPage("/Account/CustomerLogin");
+                return RedirectToPage("/Account/Login");
             }
 
             Quotation = await _quotationServiceClient.GetQuotationByIdAsync(QuotationId);
 
-            if (Quotation == null || Quotation.CustomerId != customerId.Value)
+            if (Quotation == null)
+            {
+                if (employeeRole != null )
+                    return RedirectToPage("/Quotes/OfficerDashboard");
+                    
+                return RedirectToPage("/Quotes/CustomerDashboard");
+            }
+            
+            if (customerId != null && Quotation.CustomerId != customerId.Value)
             {
                 return RedirectToPage("/Quotes/CustomerDashboard");
             }
