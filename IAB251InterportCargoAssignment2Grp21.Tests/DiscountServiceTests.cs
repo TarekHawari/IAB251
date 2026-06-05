@@ -13,9 +13,8 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             _discountService = new DiscountService();
         }
 
-        // ── DISCOUNT ELIGIBILITY TESTS ──
+        //  DISCOUNT ELIGIBILITY TESTS 
 
-        [Fact]
         public void CheckDiscount_ThreeOrMoreContainers_ReturnsFivePercent()
         {
             // Arrange
@@ -35,7 +34,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(5, result.DiscountPercent);
         }
 
-        [Fact]
         public void CheckDiscount_FiveContainers_ReturnsFivePercent()
         {
             // Arrange
@@ -55,7 +53,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(5, result.DiscountPercent);
         }
 
-        [Fact]
         public void CheckDiscount_HighValueJob_ReturnsEightPercent()
         {
             // Arrange
@@ -75,7 +72,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(8, result.DiscountPercent);
         }
 
-        [Fact]
         public void CheckDiscount_QuarantineAndPacking_ReturnsTenPercent()
         {
             // Arrange
@@ -95,7 +91,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(10, result.DiscountPercent);
         }
 
-        [Fact]
         public void CheckDiscount_QuarantineAndUnpacking_ReturnsTenPercent()
         {
             // Arrange
@@ -115,7 +110,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(10, result.DiscountPercent);
         }
 
-        [Fact]
         public void CheckDiscount_NoEligibilityCriteriaMet_ReturnsNotEligible()
         {
             // Arrange
@@ -137,7 +131,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
 
         // ── DISCOUNT CALCULATION TESTS ──
 
-        [Fact]
         public void ApplyDiscount_FivePercent_CorrectlyReducesAmount()
         {
             // Arrange
@@ -150,7 +143,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(950m, result);
         }
 
-        [Fact]
         public void ApplyDiscount_TenPercent_CorrectlyReducesAmount()
         {
             // Arrange
@@ -163,9 +155,8 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(900m, result);
         }
 
-        // ── GST TESTS ──
+        // GST TESTS 
 
-        [Fact]
         public void ApplyGST_AddsCorrectly()
         {
             // Arrange
@@ -178,7 +169,6 @@ namespace IAB251InterportCargoAssignment2Grp21.Tests
             Assert.Equal(1100m, result);
         }
 
-        [Fact]
         public void ApplyGST_AfterDiscount_CorrectTotal()
         {
             // Arrange — 1000 with 10% discount = 900, then GST = 990
