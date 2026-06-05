@@ -40,9 +40,9 @@ namespace InterportCargoTestSuite.DataAccess
             _context.Dispose();
             _connection.Dispose();
         }
-
+    
         [TestMethod]
-        public void GetByEmail_ExistingEmployeeCredential_ReturnsCredential()
+        public void GetByEmail_ExistingEmployeeCredential_ReturnsCredential() // When a matching employee email exists in the Employee table, the repository returns the correct credential.
         {
             // Arrange
             var credential = new LocalEmployeeCredential
@@ -64,7 +64,7 @@ namespace InterportCargoTestSuite.DataAccess
         }
 
         [TestMethod]
-        public void GetByEmail_UnknownEmployeeCredential_ReturnsNull()
+        public void GetByEmail_UnknownEmployeeCredential_ReturnsNull() // When no matching employee email exists, the repository correctly returns null.
         {
             // Arrange
             var credential = new LocalEmployeeCredential
@@ -85,7 +85,7 @@ namespace InterportCargoTestSuite.DataAccess
         }
 
         [TestMethod]
-        public void GetByEmail_EmailCaseDiffers_ReturnsCredential()
+        public void GetByEmail_EmailCaseDiffers_ReturnsCredential() // This Test checks whether the repository handles email case safely, the expected output should return true. 
         {
             // Arrange
             var credential = new LocalEmployeeCredential
